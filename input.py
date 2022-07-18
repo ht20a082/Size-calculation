@@ -1,5 +1,6 @@
 import cv2
 
+#img = cv2.imread("qrcode_test.png")
 capture = cv2.VideoCapture(0)
 
 tracker = cv2.TrackerMIL_create()
@@ -10,8 +11,11 @@ tracker.init(img, bbox)
 font = cv2.FONT_HERSHEY_SIMPLEX
 
 def drawBox(img, bbox):
-    x, y, w, h = int(bbox[0]), int(bbox[1]), int(bbox[2]), int(bbox[3])
-    cv2.rectangle(img, (x, y), ((x+w), (y+h)), (255, 0, 0), 3, 1)
+    #x, y, w, h = int(bbox[0]), int(bbox[1]), int(bbox[2]), int(bbox[3])
+    p1 = (int(bbox[0]), int(bbox[1]))
+    p2 = (int(bbox[0] + bbox[2]), int(bbox[1] + bbox[3]))
+    cv2.rectangle(img, p1, p2, (0,255,0), 2, 1)
+    #cv2.rectangle(img, (x, y), ((x+w), (y+h)), (255, 0, 0), 3, 1)
     cv2.putText(img, 'Tracking', (15, 70), font, 0.5, (0, 0, 255), 2)
 
 while (True):
